@@ -1,6 +1,6 @@
 import React from "react";
 
-function PizzaForm() {
+function PizzaForm({ pizzaEdit: { id, topping, size, vegetarian } }) {
   return (
     <form onSubmit={null /*handle that submit*/}>
       <div className="form-row">

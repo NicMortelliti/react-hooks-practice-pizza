@@ -19,7 +19,7 @@ function App() {
     <>
       <Header />
       <PizzaForm />
-      <PizzaList />
+      <PizzaList pizzas={pizzas} />
     </>
   );
 }

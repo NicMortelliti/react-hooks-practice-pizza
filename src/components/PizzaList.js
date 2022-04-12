@@ -14,7 +14,13 @@ function PizzaList({ pizzas, onEditClick }) {
       </thead>
       <tbody>
         {pizzas.map(pizzaData => {
-          return <Pizza pizzaData={pizzaData} onEditClick={onEditClick} />;
+          return (
+            <Pizza
+              key={pizzaData.id}
+              pizzaData={pizzaData}
+              onEditClick={onEditClick}
+            />
+          );
         })}
       </tbody>
     </table>

@@ -17,13 +17,23 @@ function App() {
   }, []);
 
   function handleEditClick(id, topping, size, vegetarian) {
-    setPizzaEdit([id, topping, size, vegetarian]);
+    setPizzaEdit({
+      id: id,
+      topping: topping,
+      size: size,
+      vegetarian: vegetarian,
+    });
+  }
+
+  function handleSubmitClick(e) {
+    e.preventDefault();
+    console.log(e.target.value);
   }
 
   return (
     <>
       <Header />
-      <PizzaForm pizzaEdit={pizzaEdit} />
+      <PizzaForm pizzaEdit={pizzaEdit} onSubmitClick={handleSubmitClick} />
       <PizzaList pizzas={pizzas} onEditClick={handleEditClick} />
     </>
   );

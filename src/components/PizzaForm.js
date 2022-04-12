@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 function PizzaForm({
   pizzaEdit: { id, topping, size, vegetarian },
   onSubmitClick,
 }) {
+  const [vegState, setVegState] = useState(vegetarian);
+
+  useEffect(() => {
+    setVegState(vegetarian);
+  }, [vegetarian]);
+
   return (
     <form onSubmit={onSubmitClick}>
       <div className="form-row">
@@ -30,7 +36,8 @@ function PizzaForm({
               type="radio"
               name="vegetarian"
               value="Vegetarian"
-              checked={vegetarian}
+              checked={vegState !== undefined ? vegState : false}
+              onChange={() => setVegState(true)}
             />
             <label className="form-check-label">Vegetarian</label>
           </div>
@@ -40,7 +47,8 @@ function PizzaForm({
               type="radio"
               name="vegetarian"
               value="Not Vegetarian"
-              checked={!vegetarian}
+              checked={vegState !== undefined ? !vegState : false}
+              onChange={() => setVegState(false)}
             />
             <label className="form-check-label">Not Vegetarian</label>
           </div>

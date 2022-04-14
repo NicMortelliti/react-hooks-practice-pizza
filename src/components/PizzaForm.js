@@ -1,7 +1,6 @@
 import React from "react";
 
 function PizzaForm({
-  idState,
   vegState,
   setVegState,
   toppingState,

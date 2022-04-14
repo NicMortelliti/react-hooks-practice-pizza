@@ -7,7 +7,10 @@ const API = "http://localhost:3001/pizzas";
 
 function App() {
   const [pizzas, setPizzas] = useState([]);
-  const [pizzaEdit, setPizzaEdit] = useState([]);
+  const [vegState, setVegState] = useState("");
+  const [toppingState, setToppingState] = useState("");
+  const [sizeState, setSizeState] = useState();
+  const [idState, setIdState] = useState("");
 
   // Initial collection of pizzas
   useEffect(() => {
@@ -16,28 +19,31 @@ function App() {
       .then(setPizzas);
   }, []);
 
-  function handleEditClick(id, topping, size, vegetarian) {
-    setPizzaEdit({
-      id: id,
-      topping: topping,
-      size: size,
-      vegetarian: vegetarian,
-    });
+  function handleEditClick(id, topping, size, veg) {
+    setIdState(id);
+    setVegState(veg);
+    setToppingState(topping);
+    setSizeState(size);
   }
 
-  function handleSubmitClick(e) {
+  function handleSubmitClick(e, id) {
     e.preventDefault();
-    const [topping, size, veg] = [
-      e.target[0].value,
-      e.target[1].value,
-      e.target[2].checked,
-    ];
+    console.log(id, e.target[0].value, e.target[1].value, e.target[2].checked);
   }
 
   return (
     <>
       <Header />
-      <PizzaForm pizzaEdit={pizzaEdit} onSubmitClick={handleSubmitClick} />
+      <PizzaForm
+        idState={idState}
+        vegState={vegState}
+        setVegState={setVegState}
+        toppingState={toppingState}
+        setToppingState={setToppingState}
+        sizeState={sizeState}
+        setSizeState={setSizeState}
+        onSubmitClick={handleSubmitClick}
+      />
       <PizzaList pizzas={pizzas} onEditClick={handleEditClick} />
     </>
   );

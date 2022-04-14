@@ -1,6 +1,7 @@
 import React from "react";
 
 function PizzaForm({
+  idState,
   vegState,
   setVegState,
   toppingState,
@@ -10,7 +11,7 @@ function PizzaForm({
   onSubmitClick,
 }) {
   return (
-    <form onSubmit={onSubmitClick}>
+    <form onSubmit={e => onSubmitClick(e, idState)}>
       <div className="form-row">
         <div className="col-5">
           <input

@@ -11,7 +11,7 @@ function PizzaForm({
   onSubmitClick,
 }) {
   return (
-    <form onSubmit={e => onSubmitClick(e, idState)}>
+    <form onSubmit={e => onSubmitClick(e)}>
       <div className="form-row">
         <div className="col-5">
           <input

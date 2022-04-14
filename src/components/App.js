@@ -19,6 +19,7 @@ function App() {
       .then(setPizzas);
   }, []);
 
+  // Update states upon click of "Edit Pizza" button
   function handleEditClick(id, topping, size, veg) {
     setIdState(id);
     setVegState(veg);
@@ -26,16 +27,33 @@ function App() {
     setSizeState(size);
   }
 
-  function handleSubmitClick(e, id) {
+  // Update backend then call frontend update function upon form submission
+  function handleSubmitClick(e) {
     e.preventDefault();
+
+    // Update backend pizza list
+    console.log(`${API}/${idState}`);
+    fetch(`${API}/${idState}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        topping: toppingState,
+        size: sizeState,
+        vegetarian: vegState,
+      }),
+    })
+      .then(r => r.json())
+      .then(updatedPizza => handleUpdatePizza(updatedPizza));
+  }
+
+  // Update front list of pizzas
+  function handleUpdatePizza(updatedPizza) {
+    // Update frontend pizza list
     const newPizzas = pizzas.map(pizza => {
-      if (id === pizza.id) {
-        return {
-          ...pizza,
-          topping: e.target[0].value,
-          size: e.target[1].value,
-          vegetarian: e.target[2].checked,
-        };
+      if (pizza.id === updatedPizza.id) {
+        return updatedPizza;
       } else {
         return pizza;
       }

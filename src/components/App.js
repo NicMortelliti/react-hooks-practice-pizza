@@ -27,7 +27,11 @@ function App() {
 
   function handleSubmitClick(e) {
     e.preventDefault();
-    console.log(e.target.value);
+    const [topping, size, veg] = [
+      e.target[0].value,
+      e.target[1].value,
+      e.target[2].checked,
+    ];
   }
 
   return (

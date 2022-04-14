@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 function PizzaForm({
-  pizzaEdit: { id, topping, size, vegetarian },
+  vegState,
+  setVegState,
+  toppingState,
+  setToppingState,
+  sizeState,
+  setSizeState,
   onSubmitClick,
 }) {
-  const [vegState, setVegState] = useState(vegetarian);
-
-  useEffect(() => {
-    setVegState(vegetarian);
-  }, [vegetarian]);
-
   return (
     <form onSubmit={onSubmitClick}>
       <div className="form-row">
@@ -19,11 +18,17 @@ function PizzaForm({
             type="text"
             name="topping"
             placeholder="Pizza Topping"
-            value={topping}
+            value={toppingState}
+            onChange={e => setToppingState(e.target.value)}
           />
         </div>
         <div className="col">
-          <select className="form-control" name="size" value={size}>
+          <select
+            className="form-control"
+            name="size"
+            value={sizeState}
+            onChange={e => setSizeState(e.target.value)}
+          >
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
             <option value="Large">Large</option>
@@ -36,7 +41,7 @@ function PizzaForm({
               type="radio"
               name="vegetarian"
               value="Vegetarian"
-              checked={vegState !== undefined ? vegState : false}
+              checked={vegState === true}
               onChange={() => setVegState(true)}
             />
             <label className="form-check-label">Vegetarian</label>
@@ -47,7 +52,7 @@ function PizzaForm({
               type="radio"
               name="vegetarian"
               value="Not Vegetarian"
-              checked={vegState !== undefined ? !vegState : false}
+              checked={vegState === false}
               onChange={() => setVegState(false)}
             />
             <label className="form-check-label">Not Vegetarian</label>

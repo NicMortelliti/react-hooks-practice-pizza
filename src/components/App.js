@@ -28,7 +28,20 @@ function App() {
 
   function handleSubmitClick(e, id) {
     e.preventDefault();
-    console.log(id, e.target[0].value, e.target[1].value, e.target[2].checked);
+    const newPizzas = pizzas.map(pizza => {
+      if (id === pizza.id) {
+        return {
+          ...pizza,
+          topping: e.target[0].value,
+          size: e.target[1].value,
+          vegetarian: e.target[2].checked,
+        };
+      } else {
+        return pizza;
+      }
+    });
+
+    setPizzas(newPizzas);
   }
 
   return (

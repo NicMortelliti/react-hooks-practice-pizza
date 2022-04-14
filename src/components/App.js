@@ -52,11 +52,7 @@ function App() {
   function handleUpdatePizza(updatedPizza) {
     // Update frontend pizza list
     const newPizzas = pizzas.map(pizza => {
-      if (pizza.id === updatedPizza.id) {
-        return updatedPizza;
-      } else {
-        return pizza;
-      }
+      return pizza.id === updatedPizza.id ? updatedPizza : pizza;
     });
 
     setPizzas(newPizzas);
